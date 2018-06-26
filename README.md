@@ -7,7 +7,9 @@ after cloning the application you should run:
 ```
 bundle
 ```
-to install all gems. Then create the database by runnuing:
+to install all gems. 
+
+Then create the database by runnuing:
 ```
 rails db:create
 ```
