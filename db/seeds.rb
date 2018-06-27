@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Question.delete_all
+
+100.times do
+    Question.create(
+        title: Faker::Hacker.say_something_smart,
+        body: Faker::HarryPotter.quote,
+        view_count: rand(0 ... 9999)
+    ) 
+end
+
+questions = Question.all
+
+puts Cowsay.say("Created #{questions.count} questions", :frogs)

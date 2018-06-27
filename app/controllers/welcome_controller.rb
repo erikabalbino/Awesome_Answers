@@ -14,4 +14,6 @@ class WelcomeController < ApplicationController
         # index.html.erb    
     end
 
+
+
 end

@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   get('/contact', {to: 'contact#index'})
 
   post('/contact_submit', {to: 'contact#create'})
+
 end
