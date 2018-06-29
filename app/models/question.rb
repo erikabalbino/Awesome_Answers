@@ -1,4 +1,42 @@
 class Question < ApplicationRecord
+
+  # When deleting a record that dependent
+  # associations (i.e. many answers),
+  # the foreign_key constraint in our db
+  # will prevent it from being deleted until
+  # all the dependent records have also been
+  # deleted.
+
+  # Set the option `dependent: :destroy` to have
+  # all associated records be destroyed before
+  # the record itself.
+
+  # `dependent: :nullify` will cause all associated
+  # answers to have their question_id column be set to
+  # NULL before the question is destroyed.
+  has_many :answers, dependent: :destroy
+
+  # `has_many :answers` adds the following instance
+  # methods to the Question model:
+
+  # answers
+  # answers<<(object, ...)
+  # answers.delete(object, ...)
+  # answers.destroy(object, ...)
+  # answers=(objects)
+  # answer_ids
+  # answer_ids=(ids)
+  # answers.clear
+  # answers.empty?
+  # answers.size
+  # answers.find(...)
+  # answers.where(...)
+  # answers.exists?(...)
+  # answers.build(attributes = {}, ...)
+  # answers.create(attributes = {})
+  # answers.create!(attributes = {})
+  # answers.reload
+
   # `validates` is a method provided by
   # the parent class `ApplicationRecord` that
   # can be used to enforce rules on the data

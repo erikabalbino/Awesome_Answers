@@ -1,14 +1,23 @@
 Rails.application.routes.draw do
 
+  # /questions/:question_id/answers
+  resources :questions do
+    # get :my_route
+    resources :answers, only: [:create, :destroy]
+  end
+
+  # The above method call `resources :questions`
+  # will exactly create all RESTful routes as written below:
+
   #Routes for QuestionsController
-  get "/questions/new", to: "questions#new", as: :new_question
-  post "/questions", to: "questions#create", as: :questions
-  get "/questions/:id", to: "questions#show", as: :question
-  get "/questions", to: "questions#index"
-  get "/questions/:id/edit", to: "questions#edit", as: :edit_question
-  patch "/questions/:id", to: "questions#update"
-  put "/questions/:id", to: "questions#update"
-  delete "/questions/:id", to: "questions#destroy"
+  # get "/questions/new", to: "questions#new", as: :new_question
+  # post "/questions", to: "questions#create", as: :questions
+  # get "/questions/:id", to: "questions#show", as: :question
+  # get "/questions", to: "questions#index"
+  # get "/questions/:id/edit", to: "questions#edit", as: :edit_question
+  # patch "/questions/:id", to: "questions#update"
+  # put "/questions/:id", to: "questions#update"
+  # delete "/questions/:id", to: "questions#destroy"
 
   # we map HTTP verb/url combo to a controller#action 
   # (action is a method inside the controller class)

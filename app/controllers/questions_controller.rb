@@ -1,7 +1,9 @@
 class QuestionsController < ApplicationController
 
+    before_action :find_question, only: [:show, :edit, :update, :destroy]
+
     def new
-    @question = Question.new
+        @question = Question.new
     end
 
     def create
@@ -29,10 +31,16 @@ class QuestionsController < ApplicationController
 
     def show
         # render json: params
-        @question = Question.find params[:id]
+
+        # @question = Question.find params[:id]
+
         # render json: @question
         @question.view_count += 1
         @question.save
+
+        @answer = Answer.new
+        @answers = @question.answers.order(created_at: :desc)
+
         # render: show
     end
 
@@ -42,11 +50,11 @@ class QuestionsController < ApplicationController
     end
 
     def edit
-        @question = Question.find params[:id]
+        # @question = Question.find params[:id]
     end
 
     def update
-        @question = Question.find params[:id]
+        # @question = Question.find params[:id]
     
         if @question.update(questions_params)
           redirect_to question_path(@question.id)
@@ -57,13 +65,18 @@ class QuestionsController < ApplicationController
 
     def destroy
         # render json: params
-        @question = Question.find params[:id]
+        # @question = Question.find params[:id]
+        
         @question.destroy
         redirect_to questions_path
     end
 
 
     private
+    def find_question
+        @question = Question.find params[:id]
+    end
+
     def questions_params
         params.require(:question).permit(:title, :body)
     end

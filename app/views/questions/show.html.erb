@@ -34,3 +34,59 @@
   </small>
 
 </div>
+
+<h2>Answers</h2>
+
+<%#
+  To tell a form_for that we're creating an answer
+  that belongs to a question, we must use an array as
+  the first argument where its first element is the
+  parent question and its second element is the
+  new answer.
+    When doing this, `form_for` will use different method
+  to get the `action` attribute. In this case, it would
+  use `questions_answers_path`.
+%>
+
+<%= form_for [@question, @answer] do |f| %>
+  <%#= f.hidden_field :question_id, value: @question.id %>
+
+    <% if @answer.errors.present? %>
+        <p>
+        <%= @answer.errors.full_messages.join(', ') %>
+        </p>
+    <% end %>
+
+  <div>
+    <%= f.text_area(
+      :body, cols: 60, rows: 6,
+      placeholder: "What are your thoughts?"
+    ) %>
+  </div>
+
+  <%= f.submit "Submit" %>
+<% end %>
+
+<div class="answer-list">
+  <% @answers.each do |answer| %>
+    <div>
+      <p>
+        <%= answer.body %> <br />
+        <small>
+            <%= link_to(
+                "Delete",
+                question_answer_path(@question, answer),
+                method: :delete,
+                data:{
+                    confirm: "Are you sure?"
+                 }
+                ) %> 
+        </small>
+        •
+        <small>
+            Answered <%= time_ago_in_words(answer.created_at) %> ago
+        </small>
+      </p>
+    </div>
+  <% end %>
+</div>
