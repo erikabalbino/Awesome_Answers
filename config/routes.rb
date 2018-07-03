@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  # `resource` is singular instead of `resources`.
+  # Unlike `resources`, `resource` will create routes
+  # that do CRUD operation on only one thing. There
+  # will be no index routes and no route will
+  # have a `:id` wild card. When using a singular resource,
+  # the controller must still be plural.
+  resource :session, only: [:new, :create, :destroy]  
+
+  resources :users, only: [:new, :create]
+
   # /questions/:question_id/answers
   resources :questions do
     # get :my_route

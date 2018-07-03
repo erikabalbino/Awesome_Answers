@@ -11,18 +11,41 @@
 
   <body>
     <!--<a href="/">Home</a> -->
-    <%= link_to('Home', home_path)%>
-    |
-    <%= link_to('New Question', new_question_path)%>
-    |
-    <%= link_to('Questions', questions_path)%>
-    |
-    <!--<a href="/contact">Contact Us</a> -->
-    <%= link_to('Contact Us', contact_path)%>
-    <hr>
+    <nav>
+      <%= link_to('Home', home_path)%>
+      |
+      <% if user_signed_in? %>
+        <%= link_to 'New Question', new_question_path %>
+        |
+      <% end %>
+      <%= link_to('Questions', questions_path)%>
+      |
+      <!--<a href="/contact">Contact Us</a> -->
+      <%= link_to('Contact Us', contact_path)%>
+      |
+      <% if current_user.present? %>
+        <span>Hi, <%= current_user.first_name %></span>
+        |
+        <%= link_to(
+            'Sign Out',
+            session_path,
+            method: :delete
+        ) %>
+      <%else %>
+        <%= link_to('Sign In', new_session_path) %>
+        |
+        <%= link_to('Sign Up', new_user_path) %>
+      <%end %>
+      <hr>
+        <!--<%= contact_path %>
+        <%= contact_url %> -->
+    </nav>
 
-    <!--<%= contact_path %>
-    <%= contact_url %> -->
+  <% flash.each do |type, message| %>
+    <div class="flash flash-<%= type %>">
+      <%= message %>
+    </div>
+  <% end %>
 
     <%= yield %>
   </body>

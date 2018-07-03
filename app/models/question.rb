@@ -1,5 +1,7 @@
 class Question < ApplicationRecord
 
+  belongs_to :user
+
   # When deleting a record that dependent
   # associations (i.e. many answers),
   # the foreign_key constraint in our db

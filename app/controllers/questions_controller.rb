@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
 
+    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
     before_action :find_question, only: [:show, :edit, :update, :destroy]
 
     def new
@@ -18,6 +19,8 @@ class QuestionsController < ApplicationController
         # render json: params
 
         @question = Question.new questions_params
+
+        @question.user = current_user
 
         if @question.save
             # redirect_to home_path

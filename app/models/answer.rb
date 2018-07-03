@@ -1,4 +1,7 @@
 class Answer < ApplicationRecord
+
+  belongs_to :user
+
   # The model with the `belongs_to` method
   # is ALWAYS the model that has the foreign
   # column (i.e. question_id).
@@ -25,4 +28,6 @@ class Answer < ApplicationRecord
   # reload_question
 
   validates :body, presence: true
+
+
 end
