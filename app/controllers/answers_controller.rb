@@ -1,6 +1,7 @@
 class AnswersController < ApplicationController
 
-    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+    before_action :authenticate_user!
+    before_action :authorize_user!, only: [:destroy]
 
     def create
         # render json: params
@@ -19,7 +20,7 @@ class AnswersController < ApplicationController
     end
 
     def destroy
-        @answer = Answer.find params[:id]
+        @answer ||= Answer.find params[:id]
         @answer.destroy
 
         redirect_to question_path(@answer.question)
@@ -28,5 +29,14 @@ class AnswersController < ApplicationController
     private
     def answer_params
       params.require(:answer).permit(:body)
+    end
+
+    def authorize_user!
+        @answer = Answer.find params[:id]
+
+        unless can?(:manage, @answer)
+            flash[:danger] = "Access Denied!"
+            redirect_to question_path(@answer.question)
+        end
     end
 end

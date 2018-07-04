@@ -7,6 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    
   </head>
 
   <body>
@@ -25,6 +26,10 @@
       |
       <% if current_user.present? %>
         <span>Hi, <%= current_user.first_name %></span>
+        <% if current_user.admin? %>
+          |
+          <%= link_to('Dashboard', admin_dashboard_index_path) %>
+        <% end %>
         |
         <%= link_to(
             'Sign Out',
@@ -41,11 +46,11 @@
         <%= contact_url %> -->
     </nav>
 
-  <% flash.each do |type, message| %>
-    <div class="flash flash-<%= type %>">
-      <%= message %>
-    </div>
-  <% end %>
+    <% flash.each do |type, message| %>
+      <div class="flash flash-<%= type %>">
+        <%= message %>
+      </div>
+    <% end %>
 
     <%= yield %>
   </body>

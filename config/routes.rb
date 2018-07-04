@@ -1,5 +1,29 @@
 Rails.application.routes.draw do
 
+  # /admin/...
+  namespace :admin do
+    # The `namespace` method takes a symbol as a first argument
+    # and a block. It will prefix the symbol's name to the
+    # path of all routes defined inside the block.
+    # GET /admin/dashboard
+    
+    resources :dashboard, only: [:index]
+
+    # It will expect that the controllers for the routes
+    # inside block to be contained in a module named after
+    # the symbol.
+    # Example: Admin::DashboardController
+
+    # It will also expect the controllers to be in a sub-directory
+    # named after the symbol.
+    # Example: /app/controllers/admin/dashboard_controller.rb
+
+    # GET /admin/users
+    # POST /admin/users
+    # GET /admin/users/:id
+    # resources :users
+  end
+
   # `resource` is singular instead of `resources`.
   # Unlike `resources`, `resource` will create routes
   # that do CRUD operation on only one thing. There
