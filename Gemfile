@@ -30,6 +30,7 @@ gem 'faker'
 gem 'cancancan'
 gem 'bootstrap'
 gem 'jquery-rails'
+gem 'rspec-rails'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
