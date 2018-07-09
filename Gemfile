@@ -27,10 +27,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'cowsay'
 gem 'faker'
-gem 'cancancan'
+gem 'cancancan' # para Authorization
 gem 'bootstrap'
 gem 'jquery-rails'
-gem 'rspec-rails'
+
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -47,7 +47,11 @@ group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'hirb'
+  gem 'rspec-rails' # para testes
+  gem 'factory_bot_rails' # para built db
+  gem 'rails-controller-testing' # para teste
 end
+
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

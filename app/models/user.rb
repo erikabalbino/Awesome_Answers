@@ -22,6 +22,7 @@ class User < ApplicationRecord
 
     has_many :questions, dependent: :nullify
     has_many :answers, dependent: :nullify
+    has_many :job_posts, dependent: :destroy
 
     validates :first_name, :last_name, presence: true
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i

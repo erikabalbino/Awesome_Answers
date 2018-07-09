@@ -68,5 +68,9 @@ class Ability
       user == answer.user
     end
 
+    can(:delete, JobPost) do |job_post|
+      user == job_post.user
+    end
+    
   end
 end

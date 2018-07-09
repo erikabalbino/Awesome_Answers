@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :job_posts, only:[:new, :create, :show, :destroy, :update]
+
   # /admin/...
   namespace :admin do
     # The `namespace` method takes a symbol as a first argument
