@@ -1,5 +1,7 @@
 class User < ApplicationRecord
     has_secure_password
+
+
     # Provides user authentication features on the model
     # it's called in. Requires a column named `password_digest`
     # and the gem `bcrypt`
@@ -19,6 +21,21 @@ class User < ApplicationRecord
     # - The attr accesssor `password_confirmation` is optional.
     #   If it is present, a validation will verify that it is
     #   identical to the `password` accessor.
+    has_many :likes
+    has_many :liked_questions, through: :likes, source: :question
+
+    # `has_many` can take a `through` named argument
+    # to create a many-to-many association via
+    # another has_many.
+
+    # We specify to `through` the name of another
+    # has_many which should correspond to a join table which
+    # is a table containing multiple foreign_keys. One each
+    # for the two tables in the many-to-many relationship.
+
+    # We should also provide a `source` named argument
+    # to specify which model we're getting back from
+    # the many-to-many relationship.
 
     has_many :questions, dependent: :nullify
     has_many :answers, dependent: :nullify

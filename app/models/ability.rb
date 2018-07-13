@@ -5,6 +5,10 @@ class Ability
     # argument to initialize.
     #              👇 current_user 
   def initialize(user)
+        # Use `alias_action` to define action that can act
+      # as another or more action(s).
+    alias_action(:creat, :read, :update, :delete, to: :crud)
+
     # Define abilities for the passed in user here. For example:
     #
 
@@ -49,7 +53,7 @@ class Ability
     # - A class of the object being affected by this permission rule usually
     #   models. (e.g. Question, Answer, User, etc)
     # - A block that must return a boolean. If true, the user has
-    #   permission to perform the action on that class. If false, the
+    #   permission to perform the action on that class. If false, they
     #   doesn't.
     can(:delete, Question) do |question|
       # |question| is the instance of the Question
@@ -60,17 +64,21 @@ class Ability
     # :manage is a special action that essentially allows
     # a user to perform any action on the class' instances
     # if the block returns true.
-    can(:manage, Question) do |question|
+    can(:crud, Question) do |question|
       user == question.user
     end
 
-    can(:manage, Answer) do |answer|
+    can(:crud, Answer) do |answer|
       user == answer.user
     end
 
     can(:delete, JobPost) do |job_post|
       user == job_post.user
     end
-    
+
+    can(:like, Question) do |question|
+      user != question.user
+    end
+
   end
 end

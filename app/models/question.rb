@@ -2,6 +2,12 @@ class Question < ApplicationRecord
 
   belongs_to :user
 
+  has_many :likes
+  has_many :likers, through: :likes, source: :user
+  # Try to pick names for your `has_many through:`
+  # relationships that describe more than just the
+  # models that are returned.
+
   # When deleting a record that dependent
   # associations (i.e. many answers),
   # the foreign_key constraint in our db

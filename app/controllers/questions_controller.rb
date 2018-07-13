@@ -46,6 +46,8 @@ class QuestionsController < ApplicationController
         @answers = @question.answers.order(created_at: :desc)
 
         # render: show
+
+        @like = @question.likes.find_by(user: current_user)
     end
 
     def index
@@ -75,6 +77,11 @@ class QuestionsController < ApplicationController
         redirect_to questions_path
     end
 
+    def liked
+        @questions = current_user
+        .liked_questions
+        .order("likes.created_at DESC")
+    end
 
     private
     def find_question
@@ -87,7 +94,7 @@ class QuestionsController < ApplicationController
 
     def authorize_user!
         
-        unless can?(:manage, @question)
+        unless can?(:crud, @question)
             flash[:danger] = "Access Denied"
             redirect_to question_path(@question)
         end

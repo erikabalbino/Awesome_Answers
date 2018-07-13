@@ -26,6 +26,9 @@
       |
       <% if current_user.present? %>
         <span>Hi, <%= current_user.first_name %></span>
+        |
+        <%= link_to 'Liked Question', liked_questions_path %>
+
         <% if current_user.admin? %>
           |
           <%= link_to('Dashboard', admin_dashboard_index_path) %>

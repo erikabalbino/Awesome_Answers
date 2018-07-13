@@ -40,6 +40,33 @@ Rails.application.routes.draw do
   resources :questions do
     # get :my_route
     resources :answers, only: [:create, :destroy]
+    
+    # /questions/liked
+    # Use the "on:" argument to specify how a nested route
+    # behaves relative to its parent.
+
+    # `on: :collection` means that it should act upon the
+    # entire collection like the `new` action.
+
+    # `on: :member` means it should act on a single instance
+    # of the collection (a member) like the `edit` action.
+    get :liked, on: :collection
+    resources :likes, shallow: true, only: [:create, :destroy]
+
+    # The `shallow: true` option will seperate routes
+    # that require the parent from routes that don't.
+    # Routes that require the parent resource will not
+    # change. Routes that don't require parent will have
+    # the parent of the url and generated method.
+
+    # This means that the index, new and create routes are
+    # unaffected. 
+
+    # The show, edit, update and destroy methods will
+    # routes will be created as if they do not have a parent.
+
+    # Example:
+    # - /questions/10/likes/10/edit becomes /likes/10/edit
   end
 
   # The above method call `resources :questions`

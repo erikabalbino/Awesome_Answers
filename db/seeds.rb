@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 PASSWORD = "supersecret"
 
+Like.delete_all
 Answer.delete_all
 Question.delete_all
 User.delete_all
@@ -51,12 +52,16 @@ puts Cowsay.say "Created #{users.count} users", :tux
         user: users.sample
       )
     end
+
+    q.likers = users.shuffle.slice(0, rand(users.count))
   end
 end
 
 questions = Question.all
 answers = Answer.all
+likes = Like.all
 
 puts Cowsay.say("Created #{questions.count} questions", :frogs)
 puts Cowsay.say("Created #{answers.count} answers", :sheep)
+puts Cowsay.say("Created #{likes.count} likes", :ghostbusters)
 puts "Login with #{super_user.email} and password of #{PASSWORD}"
