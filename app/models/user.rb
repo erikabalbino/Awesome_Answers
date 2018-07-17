@@ -21,7 +21,11 @@ class User < ApplicationRecord
     # - The attr accesssor `password_confirmation` is optional.
     #   If it is present, a validation will verify that it is
     #   identical to the `password` accessor.
-    has_many :likes
+
+    has_many :votes, dependent: :destroy
+    has_many :voted_answers, through: :votes, source: :answer
+
+    has_many :likes, dependent: :destroy
     has_many :liked_questions, through: :likes, source: :question
 
     # `has_many` can take a `through` named argument

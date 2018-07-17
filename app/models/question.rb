@@ -2,7 +2,7 @@ class Question < ApplicationRecord
 
   belongs_to :user
 
-  has_many :likes
+  has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user
   # Try to pick names for your `has_many through:`
   # relationships that describe more than just the

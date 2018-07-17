@@ -1,5 +1,8 @@
 class Answer < ApplicationRecord
 
+  has_many :votes, dependent: :destroy
+  has_many :voters, through: :votes, source: :user
+
   belongs_to :user
 
   # The model with the `belongs_to` method
@@ -29,5 +32,12 @@ class Answer < ApplicationRecord
 
   validates :body, presence: true
 
+  def vote_for(user)
+    votes.find_by(user: user)
+  end
+
+  def vote_tally
+    votes.where(up: true).count - votes.where(up: false).count
+  end
 
 end

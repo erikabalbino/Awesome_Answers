@@ -1,0 +1,28 @@
+.answer-list > article {
+    display: flex;
+}
+
+.answer-list > article .vote-widget {
+    padding-right: 20px;
+}
+
+.vote-widget {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    font-weight: bold;
+}
+
+.vote-down,
+.vote-up {
+  color: lightgrey;
+}
+
+.vote-up.vote-active {
+  color: orange;
+}
+
+.vote-down.vote-active {
+  color: blue;
+}

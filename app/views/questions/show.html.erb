@@ -92,32 +92,83 @@
   <%= f.submit "Submit" %>
 <% end %>
 
-<div class="answer-list">
+<section class="answer-list">
   <% @answers.each do |answer| %>
-    <div>
-      <p>
-        <strong>
-          <%= answer.user&.full_name || "[DELETED]" %> answered:
-        </strong> <br />
-        <%= answer.body %> <br />
+    <article>
+      <% vote = answer.vote_for(current_user) %>
 
-        <% if user_signed_in? && can?(:delete, answer) %>
-        <small>
+      <div class="vote-widget">
+        <% if vote&.up? %>
           <%= link_to(
-            "Delete",
-            question_answer_path(@question, answer),
+            "Up",
+            vote_path(vote),
             method: :delete,
-            data: {
-              confirm: "Are you sure?"
-            }
+            class: "vote-up vote-active"
           ) %>
-        </small>
-        •
+          <span><%= answer.vote_tally %></span>
+          <%= link_to(
+            "Down",
+            vote_path(vote, {up: false}),
+            method: :patch,
+            class: "vote-down"
+          ) %>
+        <% elsif vote&.down? %>
+          <%= link_to(
+            "Up",
+            vote_path(vote, {up: true}),
+            method: :patch,
+            class: "vote-up"
+          ) %>
+          <span><%= answer.vote_tally %></span>
+          <%= link_to(
+            "Down",
+            vote_path(vote),
+            method: :delete,
+            class: "vote-down vote-active"
+          ) %>
+        <% else %>
+            <%= link_to(
+              "Up",
+              answer_votes_path(answer, {up: true}),
+              method: :post,
+              class: "vote-up"
+            ) %>
+            <span><%= answer.vote_tally %></span>
+            <%= link_to(
+              "Down",
+              answer_votes_path(answer, {up: false}),
+              method: :post,
+              class: "vote-down"
+            ) %>
         <% end %>
-        <small>
-          Answered <%= time_ago_in_words(answer.created_at) %> ago
-        </small>
-      </p>
-    </div>
+      </div>
+
+      <div>
+        <p>
+          <strong>
+            <%= answer.user&.full_name || "[DELETED]" %> answered:
+          </strong> <br />
+          <%= answer.body %> <br />
+
+          <% if user_signed_in? && can?(:delete, answer) %>
+          <small>
+            <%= link_to(
+              "Delete",
+              question_answer_path(@question, answer),
+              method: :delete,
+              data: {
+                confirm: "Are you sure?"
+              }
+            ) %>
+          </small>
+          •
+          <% end %>
+          <small>
+            Answered <%= time_ago_in_words(answer.created_at) %> ago
+          </small>
+        </p>
+      </div>
+    </article>
+    <hr>
   <% end %>
-</div>
+</section>

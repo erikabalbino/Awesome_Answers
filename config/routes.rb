@@ -36,6 +36,17 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create]
 
+  # Here I want create nested routes for votes on answers
+  # without creating any of the resources for answers themselves,
+  # because the routes for answers are already as nested
+  # routes of the question resource.
+
+  # If `shallow: true` is put on the parent resource,
+  # all children resources will also be shallow.
+  resources :answers , shallow: true, only: [] do
+    resources :votes, only: [:create, :update, :destroy]
+  end
+
   # /questions/:question_id/answers
   resources :questions do
     # get :my_route

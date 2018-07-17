@@ -4,7 +4,7 @@ class Like < ApplicationRecord
 
   validates :question_id, uniqueness: { scope: :user_id}
 
-    # This validation creates a scoped uniqueness.
+  # This validation creates a scoped uniqueness.
   # It means that can be only one of the same question_id
   # per user_id
 
