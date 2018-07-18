@@ -37,5 +37,9 @@ module AwesomeAnswers
       g.assets = false
     end
     
+    # This tells Rails' ActiveJob internal library
+    # to use "delayed_job" to manage our job queue.
+    # Again, "delayed_job" is the gem we installed earlier.
+    config.active_job.queue_adapter = :delayed_job
   end
 end

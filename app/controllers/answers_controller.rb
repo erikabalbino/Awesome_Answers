@@ -13,9 +13,25 @@ class AnswersController < ApplicationController
 
         if @answer.save
             if @question.user.present?
+
+                # This sends mail synchronously
+                # which will block your rails process:
+                # AnswerMailer
+                #   .notify_question_owner(@answer)
+                #   .deliver_now
+        
+                # This sends mail asynchronously using
+                # your ActiveJob setup which will not
+                # block the rails process. This is
+                # best practice.
+                
                 AnswerMailer
                   .notify_question_owner(@answer)
-                  .deliver_now
+                  .deliver_later
+                  # .deliver_later(wait: 10.minutes)
+                  # .deliver_later(run_at: 1.day.from_now)
+                  # `deliver_later` accepts the same arguments
+                  # as `set` for ActiveJobs.
             end
 
             redirect_to question_path(@question)

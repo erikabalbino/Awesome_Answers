@@ -37,6 +37,7 @@ gem 'chosen-rails'
 
 gem 'letter_opener'
 gem 'delayed_job_active_record'
+gem 'delayed_job_web'
 
 
 # Use ActiveStorage variant

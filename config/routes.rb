@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  match(
+    "/delayed_job", 
+    to: DelayedJobWeb, 
+    anchor: false, 
+    via: [:get, :post]
+  )
+
   # Rails routes will route path & url methods
   # get(:thing, as: :thing) <-- Creates the following methods
   # thing_path # return "/thing"
