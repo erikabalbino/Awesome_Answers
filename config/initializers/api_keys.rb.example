@@ -1,0 +1,6 @@
+# Create a copy of this file in this directory
+# removing `.example` from its name then replace
+# the relevent text below.
+
+ENV["EMAIL_USERNAME"] = "PUT GMAIL USERNAME HERE"
+ENV["EMAIL_PASSWORD"] = "PUT GMAIL PASSWORD HERE"
