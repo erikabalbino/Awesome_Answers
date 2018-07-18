@@ -30,6 +30,20 @@
         <%= f.text_area(:body) %>
     </div>
 
+  <div>
+    <%= f.label(:tags) %>
+    <%= f.collection_select(
+      :tag_ids,
+      Tag.order(name: :asc), # Objects to be listed in collection
+      :id, # Method to call on objects from collection to get
+      # the "value" attributes of the <option>
+      :humanized_name, # Method to call on objects from collection to
+      # get display content of the <option>
+      {},
+      {multiple: :true, class: 'chosen-select'}
+    ) %>
+  </div>
+
     <%= f.submit " Submit" %>
 
 <% end %>

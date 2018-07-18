@@ -12,11 +12,19 @@ class AnswersController < ApplicationController
         @answer.user = current_user
 
         if @answer.save
+            if @question.user.present?
+                AnswerMailer
+                  .notify_question_owner(@answer)
+                  .deliver_now
+            end
+
             redirect_to question_path(@question)
+
         else
             @answers = @question.answers.order(created_at: :desc)
             render "questions/show"
         end
+
     end
 
     def destroy

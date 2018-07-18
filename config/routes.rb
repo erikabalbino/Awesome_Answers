@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  # Rails routes will route path & url methods
+  # get(:thing, as: :thing) <-- Creates the following methods
+  # thing_path # return "/thing"
+  # thing_url # return "http://localhost:3000/thing"
+
   resources :job_posts, only:[:new, :create, :show, :destroy, :update]
 
   # /admin/...

@@ -89,7 +89,12 @@ class QuestionsController < ApplicationController
     end
 
     def questions_params
-        params.require(:question).permit(:title, :body)
+        # Whenever your params contain an array, all the values
+        # from the must be permitted as well. To do this,
+        # use a key-value argument where the key is the name
+        # of the input and the value is an empty array.
+        
+        params.require(:question).permit(:title, :body, tag_ids: [])
     end
 
     def authorize_user!

@@ -27,9 +27,16 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'cowsay'
 gem 'faker'
+
 gem 'cancancan' # para Authorization
+
 gem 'bootstrap'
 gem 'jquery-rails'
+
+gem 'chosen-rails'
+
+gem 'letter_opener'
+gem 'delayed_job_active_record'
 
 
 # Use ActiveStorage variant

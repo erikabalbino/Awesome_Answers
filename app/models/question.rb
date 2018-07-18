@@ -2,6 +2,12 @@ class Question < ApplicationRecord
 
   belongs_to :user
 
+  has_many :taggings, dependent: :destroy
+  # If the name of the `has_many` is the same as the source
+  # (ignoring pluralization), then we can omit the "source" argument.
+  has_many :tags, through: :taggings#, source: :taggings
+
+
   has_many :likes, dependent: :destroy
   has_many :likers, through: :likes, source: :user
   # Try to pick names for your `has_many through:`

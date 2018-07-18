@@ -4,6 +4,11 @@
 
 <p>By <%= @question.user&.full_name || "[DELETED]" %> </p>
 
+<p>
+  <strong>Tags:</strong>
+  <%= @question.tags.order(name: :asc).map{ |t| t.humanized_name }.join(", ") %>
+</p>
+
 <div> 
     <small>
         Posted <%= time_ago_in_words(@question.created_at) %> ago

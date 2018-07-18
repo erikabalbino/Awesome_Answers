@@ -7,6 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 PASSWORD = "supersecret"
 
+Tagging.delete_all
+Tag.delete_all
+Vote.delete_all
 Like.delete_all
 Answer.delete_all
 Question.delete_all
@@ -36,12 +39,23 @@ users = User.all
 
 puts Cowsay.say "Created #{users.count} users", :tux
 
+20.times do
+  Tag.create(
+    name: Faker::Book.genre
+    )
+end
+
+tags = Tag.all
+  
+puts Cowsay.say "Created #{tags.count} tags", :tux
+
 100.times do
   q = Question.create(
     title: Faker::Hacker.say_something_smart,
     body: Faker::HarryPotter.quote,
     view_count: rand(0...9999),
-    user: users.sample
+    user: users.sample,
+    tags: tags.shuffle.slice(0, rand(1..4))
   )
 
   if q.valid?
