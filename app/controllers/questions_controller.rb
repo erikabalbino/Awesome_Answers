@@ -51,8 +51,14 @@ class QuestionsController < ApplicationController
     end
 
     def index
-        @questions = Question.all.order(created_at: :desc)
         # render json: @questions
+        @questions = Question.all.order(created_at: :desc)
+
+        # respond_to do |format|
+        #     format.html { render }
+        #     format.json { render json: @questions }
+        # end
+
     end
 
     def edit
@@ -93,7 +99,7 @@ class QuestionsController < ApplicationController
         # from the must be permitted as well. To do this,
         # use a key-value argument where the key is the name
         # of the input and the value is an empty array.
-        
+
         params.require(:question).permit(:title, :body, tag_ids: [])
     end
 

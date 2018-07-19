@@ -1,5 +1,22 @@
 Rails.application.routes.draw do
 
+  # http://localhost:3000/api/v1/questions
+
+  # The option `defaults: { format: :json }` will set
+  # "json" as the default response format for all routes
+  # contained within the block of the namespace.
+
+  namespace :api, defaults: { format: :json } do
+    # /api...
+    namespace :v1 do
+      # /api/v1...
+      resources :questions
+        # /api/v1/questions
+      resource :session, only: [:create, :destroy]
+        # /api/v1/session
+    end
+  end
+
   match(
     "/delayed_job", 
     to: DelayedJobWeb, 
