@@ -99,7 +99,7 @@
 
 <section class="answer-list">
   <% @answers.each do |answer| %>
-    <article>
+    <article id="<%= dom_id(answer) %>">
       <% vote = answer.vote_for(current_user) %>
 
       <div class="vote-widget">
@@ -160,9 +160,11 @@
             <%= link_to(
               "Delete",
               question_answer_path(@question, answer),
-              method: :delete,
+              # method: :delete,
+              class: "btn-delete",
               data: {
-                confirm: "Are you sure?"
+                id: answer.id,
+                # confirm: "Are you sure?"
               }
             ) %>
           </small>

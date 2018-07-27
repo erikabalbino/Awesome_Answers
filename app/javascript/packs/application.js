@@ -7,4 +7,12 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
+// Sometimes we want to import a file just to execute its contents
+// without having to get a value in return. To do this, use the
+// `import` syntax without a name or `for` as shown below:
+import "../src/answer-delete";
+// The above will execute the code in "../src/answer-delete"
+
 console.log('Hello World from Webpacker')
+
+
