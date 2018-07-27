@@ -10,7 +10,10 @@ Rails.application.routes.draw do
     # /api...
     namespace :v1 do
       # /api/v1...
-      resources :questions
+      resources :questions do
+        resources :likes, shallow: true, only: [:create, :destroy]
+      end  
+
       resources :answers, only: [:destroy]
         # /api/v1/questions
       resource :session, only: [:create, :destroy]

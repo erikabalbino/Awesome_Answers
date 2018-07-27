@@ -3,6 +3,11 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
+    "babel-preset-react": "^6.24.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react_ujs": "^2.4.4",
     "tippy.js": "^2.5.4"
   },
   "devDependencies": {

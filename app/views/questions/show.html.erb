@@ -1,8 +1,21 @@
-<h2> <%= @question.title %> </h2>
+<h2> 
+
+  <%= @question.title %> 
+</h2>
 
 <p> <%= @question.body %> </p>
 
 <p>By <%= @question.user&.full_name || "[DELETED]" %> </p>
+
+<%= react_component(
+  "LikeWidget",
+  { 
+    questionId: @question.id, 
+    likedId: @like&.id, 
+    likeCount: @question.likes.count 
+  }
+  ) 
+%>
 
 <p>
   <strong>Tags:</strong>

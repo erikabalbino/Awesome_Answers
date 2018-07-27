@@ -14,6 +14,10 @@ import "../src/answer-delete";
 import "../src/tooltip-for-questions";
 // The above will execute the code in "../src/answer-delete"
 
-console.log('Hello World from Webpacker')
+// console.log('Hello World from Webpacker')
 
 
+// Support component names relative to this directory:
+var componentRequireContext = require.context("components", true)
+var ReactRailsUJS = require("react_ujs")
+ReactRailsUJS.useContext(componentRequireContext)
