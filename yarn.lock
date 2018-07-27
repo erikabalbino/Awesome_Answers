@@ -4001,6 +4001,10 @@ pleeease-filters@^4.0.0:
     onecolor "^3.0.4"
     postcss "^6.0.1"
 
+popper.js@^1.14.3:
+  version "1.14.3"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
+
 portfinder@^1.0.9:
   version "1.0.13"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.13.tgz#bb32ecd87c27104ae6ee44b5a3ccbf0ebb1aede9"
@@ -5521,6 +5525,12 @@ timers-browserify@^2.0.4:
   resolved "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-2.0.10.tgz#1d28e3d2aadf1d5a5996c4e9f95601cd053480ae"
   dependencies:
     setimmediate "^1.0.4"
+
+tippy.js@^2.5.4:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-2.5.4.tgz#69155d673761275dbf874c93175df443a006de46"
+  dependencies:
+    popper.js "^1.14.3"
 
 to-arraybuffer@^1.0.0:
   version "1.0.1"

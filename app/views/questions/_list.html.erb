@@ -4,6 +4,8 @@
       <%= link_to(
         question.title,
         question_path(question.id),
+        class: "awesome-tolltip",
+        title: " 👀 #{question.view_count} ❤️ #{question.likes.count}"
       ) %>
       <br />
       <small>
@@ -12,3 +14,4 @@
     </li>
   <% end %>
 </ul>
+

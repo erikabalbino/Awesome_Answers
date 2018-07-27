@@ -11,6 +11,7 @@
 // without having to get a value in return. To do this, use the
 // `import` syntax without a name or `for` as shown below:
 import "../src/answer-delete";
+import "../src/tooltip-for-questions";
 // The above will execute the code in "../src/answer-delete"
 
 console.log('Hello World from Webpacker')
