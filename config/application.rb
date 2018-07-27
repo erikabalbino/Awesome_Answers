@@ -36,10 +36,28 @@ module AwesomeAnswers
       # Don't generate coffeescript and scss files
       g.assets = false
     end
-    
+
     # This tells Rails' ActiveJob internal library
     # to use "delayed_job" to manage our job queue.
     # Again, "delayed_job" is the gem we installed earlier.
     config.active_job.queue_adapter = :delayed_job
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'localhost:3002'
+        # "origins" options specifies the domains that are allowed
+        # to make cross-origin request to our Rails server
+
+        resource(
+          '/api/v1/*', 
+        headers: :any, 
+        credentials: true,
+        methods: [:get, :post, :delete, :patch, :put, :options]
+        )
+        # "resource" options specifies which urls we will be allowed
+        # to perform CORS on. Above, we say that all urls that begin
+        # with `/api/v1/` are allowed.
+      end
+    end
   end
 end
