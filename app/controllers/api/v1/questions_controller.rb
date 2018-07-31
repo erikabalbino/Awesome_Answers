@@ -11,7 +11,23 @@ class Api::V1::QuestionsController < Api::ApplicationController
     end
 
     def show
-        render json: question
+        render(
+            json: question, 
+            # When using ActiveModelSerializer, it will
+            # not automatically including nested associations
+            # in the generated JSON. It does this for
+            # perfomance reasons.
+
+            # To include a nested association, we must
+            # tell Rails to do so using the "include"
+            # argument in the "render" method.
+
+            # In the below, we specify that the "author"
+            # associate is included. We also specify
+            # the "answer" association and the "answer's
+            # authors" are included as well.
+            include:[ :author, { answers: [ :author ] }]
+            )
     end
 
     def create
